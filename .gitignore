@@ -1,0 +1,10 @@
+**/.idea/*
+**/dist/*
+**/data/*
+coverage.html
+.env
+gin-bin
+**/tmp/*
+http-client.private.env.json
+.DS_Store
+.idea/*
