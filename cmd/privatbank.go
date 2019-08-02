@@ -3,10 +3,10 @@ package main
 import (
 	"flag"
 	"github.com/sirupsen/logrus"
-	"glab.ihatebot.ru/ruslan.root/privatbank"
+	"github.com/tggo/privatbank"
 )
 
-func main()  {
+func main() {
 	merchantPtr := flag.Int("merchant", 0, "merchant ID")
 	merchantPasswordPtr := flag.String("password", "", "merchant password")
 
@@ -15,24 +15,21 @@ func main()  {
 	endDatePtr := flag.String("end", "31.12.2019", "end date")
 	flag.Parse()
 
-	if *cardNumPtr=="" {
+	if *cardNumPtr == "" {
 		panic("need set -card")
 	}
 
-	if *merchantPasswordPtr=="" {
+	if *merchantPasswordPtr == "" {
 		panic("need set -password")
 	}
 
-	if *merchantPtr==0 {
+	if *merchantPtr == 0 {
 		panic("need set -merchant")
 	}
 
-
-	api := privatbank.NewApi(*merchantPtr, *merchantPasswordPtr )
+	api := privatbank.NewApi(*merchantPtr, *merchantPasswordPtr)
 	gotBalanceRequest := api.AccountStatement(*cardNumPtr, *startDatePtr, *endDatePtr)
 	logrus.Infof("%+v", gotBalanceRequest)
 	//data := api.GetExchangeArchive(time.Date(2018, 1, 18, 0,0,0,0, time.Local))
 	//logrus.Infof("%+v", data)
 }
-
-
