@@ -110,16 +110,15 @@ func (api *Privat24Api) AccountStatement(cardNumber string, startDate string, en
 
 	response, err := api.requestXML(url, bytes.NewBuffer(byteXML), "POST")
 	if err != nil {
-		logrus.Errorf("error make request %s",err.Error())
+		logrus.Errorf("error make request %s", err.Error())
 	}
 
 	balanceResponse := new(OrdersResponseXML)
 
-
-
 	err = xml.Unmarshal(response, &balanceResponse)
 	if err != nil {
-		logrus.Errorf("error Unmarshal  %s",err.Error())
+		logrus.Errorf("error Unmarshal %s", err.Error())
+		logrus.Errorf("body: %s", string(response))
 
 	}
 
