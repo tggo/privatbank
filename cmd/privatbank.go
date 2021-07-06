@@ -2,8 +2,10 @@ package main
 
 import (
 	"flag"
+
+	"tggo/privatbank"
+
 	"github.com/sirupsen/logrus"
-	"github.com/tggo/privatbank"
 )
 
 func main() {
@@ -30,6 +32,6 @@ func main() {
 	api := privatbank.NewApi(*merchantPtr, *merchantPasswordPtr)
 	gotBalanceRequest := api.AccountStatement(*cardNumPtr, *startDatePtr, *endDatePtr)
 	logrus.Infof("%+v", gotBalanceRequest)
-	//data := api.GetExchangeArchive(time.Date(2018, 1, 18, 0,0,0,0, time.Local))
-	//logrus.Infof("%+v", data)
+	// data := api.GetExchangeArchive(time.Date(2018, 1, 18, 0,0,0,0, time.Local))
+	// logrus.Infof("%+v", data)
 }

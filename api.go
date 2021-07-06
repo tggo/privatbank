@@ -3,12 +3,12 @@ package privatbank
 import (
 	"encoding/xml"
 	"errors"
-	"github.com/sirupsen/logrus"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"time"
-	"fmt"
+
+	"github.com/sirupsen/logrus"
 )
 
 const apiUrl = "https://api.privatbank.ua/p24api"
@@ -39,7 +39,7 @@ func NewApi(merchantID int, merchantPassword string) *Privat24Api {
 }
 
 func (api *Privat24Api) requestXML(url string, body io.Reader, method string) ([]byte, error) {
-	req, err := http.NewRequest(http.Request{}.Method, url, body)
+	req, err := http.NewRequest("POST", url, body)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ func (api *Privat24Api) getMerchantStructure(data interface{}) Merchant {
 	merchant := new(Merchant)
 	merchant.ID = api.MerchantID
 	merchant.Signature = SHA1(GetMD5Hash(string(res) + api.MerchantPassword))
-	fmt.Printf("merchant: %+v\n",merchant)
-	
+	// fmt.Printf("merchant: %+v\ndata: %+v\n",merchant, data)
+
 	return *merchant
 }
