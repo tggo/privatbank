@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
+	"fmt"
 )
 
 const apiUrl = "https://api.privatbank.ua/p24api"
@@ -21,7 +22,7 @@ type Privat24Api struct {
 
 func NewPublicApi() *Privat24Api {
 	client := &http.Client{
-		Timeout: time.Second * 60,
+		Timeout: time.Second * 360,
 	}
 	api := &Privat24Api{Client: client, APIUrl: apiUrl}
 
@@ -30,7 +31,7 @@ func NewPublicApi() *Privat24Api {
 
 func NewApi(merchantID int, merchantPassword string) *Privat24Api {
 	client := &http.Client{
-		Timeout: time.Second * 60,
+		Timeout: time.Second * 360,
 	}
 	api := &Privat24Api{MerchantID: merchantID, MerchantPassword: merchantPassword, Client: client, APIUrl: apiUrl}
 
@@ -71,6 +72,7 @@ func (api *Privat24Api) getMerchantStructure(data interface{}) Merchant {
 	merchant := new(Merchant)
 	merchant.ID = api.MerchantID
 	merchant.Signature = SHA1(GetMD5Hash(string(res) + api.MerchantPassword))
-
+	fmt.Printf("merchant: %+v\n",merchant)
+	
 	return *merchant
 }
