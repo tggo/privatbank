@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	"tggo/privatbank"
+	"github.com/tggo/privatbank"
 
 	"github.com/sirupsen/logrus"
 )

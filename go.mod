@@ -1,4 +1,4 @@
-module tggo/privatbank
+module github.com/tggo/privatbank
 
 go 1.16
 
