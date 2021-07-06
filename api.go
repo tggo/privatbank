@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-const apiUrl = "https://api.privatbank.ua/p24api/"
+const apiUrl = "https://api.privatbank.ua/p24api"
 
 type Privat24Api struct {
 	MerchantID       int
